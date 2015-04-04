@@ -1,0 +1,17 @@
+extends layout
+
+block content
+	h2 Add a New Restaurant
+	form(method='post', action='/restaurants/add', enctype='multipart/form-data')
+		label(for='restaurantName') Name
+		input(name='restaurantName', type='text', required, placeholder='Name of Restaurant')
+		label(for='url') URL of the restaurant
+		input(name='url', type='url', required, placeholder='URL of the restaurant')
+		label(for='image') Image
+		input(name='image', type='file', required, placeholder='Add an Image')
+		label(for='rating') Rating (Out of 5)
+		input(name='rating', type='number', min='1', max='5', required, placeholder='Rating')
+		label(for='description') Description 
+		textarea(name='description', type='text', required, placeholder='Description')
+		div(class='clearfix')
+			input(type='submit', value='Add Restaurant')

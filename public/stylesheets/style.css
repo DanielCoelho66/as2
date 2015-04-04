@@ -1,0 +1,211 @@
+/*== START PAGE STYLING ==*/
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+#page {
+	width: 80%;
+	margin: auto;
+}
+#container {
+	width: 50%;
+	margin: 0 auto;
+}
+h2 {
+	font-size: 24px; 
+	text-align:center;
+}
+img {
+	display: block;
+	margin: 30px auto;
+}
+#container > a {
+	background-color: blue;
+	color: white;
+	padding: 2%;
+	text-decoration: none;
+	font-weight: bold;
+	float: left;
+	border: 2px solid blue;
+	transition: all 1s linear;
+}
+#container > a:hover,
+td > a:hover {
+	background-color: white;
+	color: blue;
+	border: 2px solid blue;
+	transition: all 1s linear;
+}
+#container > a:last-of-type {
+	float: right;
+}
+/*== END PAGE STYLING ==*/
+
+/*== START NAV STYLING ==*/
+nav {
+	width: 50%;
+	margin: 0 auto;
+}
+nav ul li {
+	list-style-type: none;
+	display: inline;
+	padding: 0 5%;
+}
+nav a {
+	color: white;
+	padding: 3px;
+	text-decoration:none;
+	font-size: 20px;
+	font-weight: bold;
+}
+nav a:hover {
+	text-decoration: underline;
+}
+/*== END NAV STYLING ==*/
+
+/*== START HEADER STYLING ==*/
+header {
+	padding: 0.25em 0;
+	background-color: blue;
+	color: white;
+}
+header h1 {
+	font-size: 30px;
+	text-align:center;
+}
+/*== END HEADER STYLING ==*/
+
+/*== START TABLE STYLING ==*/
+table {
+	width: 50%;
+	margin: 0 auto;
+	margin-bottom: 150px;
+	padding: 1%;
+}
+td {
+	display: block;
+	font-weight: bold;
+	line-height: 2;
+}
+td > a {
+	text-decoration: none;
+	color: blue;
+	border-radius: 5px;
+	background-color: blue;
+	color: white;
+	padding: 1%;
+	border: 2px solid blue;
+	transition: all 1s linear;
+}
+#donate {
+	background-color: gold;
+	border: 2px solid gold;
+	transition: all 1s linear;
+}
+#donate:hover {
+	background-color: white;
+	color: black;
+	transition: all 1s linear;
+}
+#url {
+	background: none;
+	border: none;
+	color: blue;
+	padding: 0;
+}
+td:nth-of-type(2) {
+	font-size: 30px;
+}
+td:nth-of-type(3),
+td:nth-of-type(5) {
+	font-style: italic;
+}
+td:nth-of-type(4) {
+	font-weight: normal;
+}
+td:last-of-type {
+	padding-bottom: 50px;
+	border-bottom: 2px solid black;
+}
+tfoot > tr > td:only-child{
+	border: none;
+	padding: 20px 0;
+}
+tfoot > tr > td:only-child > a {
+	float: right;
+	padding: 1%;
+	transition: all 1s linear;
+	border: 2px solid blue;
+}
+
+/*== END TABLE STYLING ==*/
+
+/*== START FORM STYLING ==*/
+form {
+	width: 50%;
+	margin: 0 auto;
+}
+label {
+	display: inline-block;
+	width: 30%;
+	font-weight: bold;
+	text-align: right;
+	padding: 0 30px;
+}
+input, textarea {
+	border: 1px solid black;
+	border-radius: 3px;
+	padding: 1%;
+	margin: 10px 0;
+	display: inline-block;
+}
+label + input {
+	width: 30%;
+}
+input:nth-of-type(3) {
+	border: none;
+	padding: 1%;
+}
+form > div {
+	padding: 1%;
+	width: 45%; 
+	margin: 0 auto;
+}
+form > div > input {
+	display: block;
+	padding: 3%;
+	float: right;
+	background-color: #0C3;
+	font-weight: bold;
+}
+/*== END FORM STYLING ==*/
+
+/*== START FOOTER STYLING ==*/
+footer {
+	padding: 1em;
+	background-color: black;
+	color: white;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+footer p {
+	font-size: 12px;
+}
+/*== END FOOTER STYLING ==*/
+
+/*== clearfix to fix floated elements ==*/
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */

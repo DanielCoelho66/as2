@@ -1,0 +1,18 @@
+extends layout
+
+block content
+	h2 Add a New Restaurant
+	form(method='post', action='/restaurants/edit/#{restaurant._id}')
+		label(for='restaurantName') Name
+		input(name='restaurantName', type='text', required, placeholder='Name of Restaurant', value='#{restaurant.restaurantName}')
+		label(for='url') URL of the restaurant
+		input(name='url', type='url', required, placeholder='URL of the restaurant', value='#{restaurant.url}')
+		label(for='image') Image
+		input(name='image', type='file', placeholder='Add an Image', value='#{restaurant.image}')
+		label(for='rating') Rating (Out of 5)
+		input(name='rating', type='number', min='1', max='5', required, placeholder='Rating', value='#{restaurant.rating}')
+		label(for='description') Description 
+		textarea(name='description', type='text', required, placeholder='Description') #{restaurant.description}
+		div(class='clearfix')
+			input(type='hidden', name='id' value='#{restaurant._id}')
+			input(type='submit', value='Update Restaurant')
