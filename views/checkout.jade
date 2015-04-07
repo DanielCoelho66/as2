@@ -1,0 +1,8 @@
+extends layout
+
+block content
+	form(action='/restaurants/donate', method='POST')
+		h2#TotalAmount Total Donation Amount: $ #{TotalAmountDollars}
+		input(type='hidden', name='TotAmtCents', id='TotAmtCents', value='#{ TotalAmountCents }')
+		script.stripe-button(src='https://checkout.stripe.com/checkout.js', data-key='pk_test_0Xbv1tqLVx34Oo8Mm98GLNxN', data-amount='#{TotalAmountCents}', data-name='Credit Card')
+

@@ -157,6 +157,48 @@ router.post('/restaurants/edit/:id', function (req,res,next) {
 	});
 });
 
+router.get('/restaurants/donation/:id', function (req,res,next) {
+	var id = req.params.id;
+	
+	//gets the id
+	Restaurant.findById(id, function (err, restaurant) {
+		//if error sends the error
+		if (err) {
+			res.send('Could not find restaurant' + id);
+		}
+		//if no error loads the edit.jade page
+		else {
+			res.render('donation', {restaurant: restaurant, title: 'Assignment 2'});
+		}
+	});
+});
+
+router.post('/restaurants/checkout', function (req,res,next) {
+	var totalAmountCents = Math.round(parseFloat(req.body.Price * req.body.Qty)* 100); // convert dollars to cents
+	var totalAmountDollars = parseFloat((req.body.Price * req.body.Qty).toFixed(2));
+	res.render('checkout', {title: 'Assignment 2', TotalAmountCents: totalAmountCents, TotalAmountDollars: totalAmountDollars});
+});
+
+var stripe = require("stripe")("sk_test_6ylkK6n5ReMSdlZBhvhrLS8T");
+
+router.post('/restaurants/donate', function (req,res,next) {
+	var stripeToken = req.body.stripeToken;
+	var charge = stripe.charges.create({
+		amount: req.body.TotAmtCents,
+		currency: "cad",
+		card: stripeToken,
+		description: 'This is a description'
+	}, function(err, donate) {
+		if (err) {
+			res.render('error', { title: 'Payment Unsuccessful', error: err } );
+		} else {
+			res.render('donated', { title: 'Payment Successful' } );
+		}
+	});
+});
+
+
+
 // sends the data for all restaurants in an API request
 router.get('/api/restaurants', function (req,res,next) {
 	Restaurant.find(function (err, restaurant) {

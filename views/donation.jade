@@ -1,0 +1,26 @@
+extends layout
+
+block content
+	script.
+		function populateModel() {
+		document.getElementById('Qty').value = document.getElementById('quantity').value;
+		}   
+	form(name='cart-form', id='cart', action='/restaurants/checkout', method='POST')
+		input(type='hidden', name='Price', id='Price', value='50')
+		input(type='hidden', name='Qty', id='Qty', value='1')
+		h2 Donating to: 
+		div
+			h2 #{restaurant.restaurantName} 
+			img(src='/images/#{restaurant.image}', width='100px' height='100px')
+		label(for='quantity' id='donateLabel') Select an amount you wish to donate:
+		br
+		select(id='quantity', onChange='populateModel()')
+			option(value='1') $50
+			option(value='2') $100
+			option(value='3') $150
+			option(value='4') $200
+			option(value='5') $250
+			option(value='10') $500
+			option(value='20') $1000
+		br
+		input(id='donate', type='submit', value='Donate')		

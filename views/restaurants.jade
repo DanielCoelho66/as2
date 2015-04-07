@@ -7,14 +7,14 @@ block content
 			each restaurant, i in restaurants
 				tr
 					td 
-						img(src='/images/#{restaurant.image}', width='500px')
+						img(src='/images/#{restaurant.image}', width='200px' height='200px')
 					td #{restaurant.restaurantName}
 					td 
 						a(href='#{restaurant.url}' id='url' title='#{restaurant.url') #{restaurant.url}
 					td #{restaurant.description}
 					td Rating: #{restaurant.rating}
 					td 
-						a(href='#' id='donate', title='Donate to this restaurant') Donate
+						a(href='restaurants/donation/#{restaurant._id}' id='donate', title='Donate to this restaurant') Donate
 					td
 						a(href='restaurants/edit/#{restaurant._id}' title='Edit') Edit
 					td
