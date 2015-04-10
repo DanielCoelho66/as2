@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// include these dependencies in the application
+var basicAuth = require('basic-auth-connect');
 var formidable = require('formidable');
 var util = require('util');
 var fs = require('fs-extra');
@@ -13,7 +15,6 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,7 +29,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+
+// application security - authentication needed to access edit page
+var auth = basicAuth(function(user, pass, fn) {
+	var result = (user === 'user' && pass === 'as2');
+	
+	if (result) fn(null, user);
+	else fn(null);
+});
+
+app.use('/restaurants/edit/:id', auth);
 
 //connect to the db
 var mongoose = require('mongoose');

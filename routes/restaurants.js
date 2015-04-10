@@ -11,6 +11,9 @@ var formidable = require('formidable');
 var util = require('util');
 var fs = require('fs-extra');
 
+//credit card payment dependency
+var stripe = require("stripe")("sk_test_6ylkK6n5ReMSdlZBhvhrLS8T");
+
 // gets the add a restaurant page and shows the form
 router.get('/restaurants/add', function (req,res,next) {
 	res.render('add', {title: 'Assignment 2'});
@@ -24,11 +27,13 @@ router.post('/restaurants/add', function (req, res, next) {
 
     });
 	
+	// variables for the input fields to the store data entered
 	var restaurantName;
 	var url;
 	var rating;
 	var description;
 	
+	// retrieves data from form and stores in appropriate variable
 	form.on('field', function(name,value) {
 		if(name == 'restaurantName') {
 			restaurantName = value;
@@ -43,13 +48,12 @@ router.post('/restaurants/add', function (req, res, next) {
 			description = value;
 		}
 	});
-
+	
+	// finds the path of the image file and saves it into public/images
     form.on('end', function(fields, files) {
    
         var tempPath = this.openedFiles[0].path;
-        
         var fileName = this.openedFiles[0].name;
-        
         var newLocation = 'public/images/'; 
         
         fs.copy(tempPath, newLocation + fileName, function(err) {
@@ -157,6 +161,23 @@ router.post('/restaurants/edit/:id', function (req,res,next) {
 	});
 });
 
+// shows the restaurant listings
+router.get('/restaurants', function (req,res,next) {
+	// finds all existing restaurants
+	Restaurant.find(function (err, restaurants) {
+		// if error shows the error
+		if (err) {
+			res.render('error', {error: err});	
+		}	
+		// if no error loads the restaurants.jade file with the existing restaurants data
+		else {
+			res.render('restaurants', {restaurants: restaurants, title: 'Assignment 2'});
+		}
+	});	
+});
+
+
+// gets the donation.jade page
 router.get('/restaurants/donation/:id', function (req,res,next) {
 	var id = req.params.id;
 	
@@ -166,21 +187,23 @@ router.get('/restaurants/donation/:id', function (req,res,next) {
 		if (err) {
 			res.send('Could not find restaurant' + id);
 		}
-		//if no error loads the edit.jade page
+		//if no error loads the donation.jade page
 		else {
 			res.render('donation', {restaurant: restaurant, title: 'Assignment 2'});
 		}
 	});
 });
 
+// calculates and stores the amount selected into appropriate variables to be used in checkout page
 router.post('/restaurants/checkout', function (req,res,next) {
-	var totalAmountCents = Math.round(parseFloat(req.body.Price * req.body.Qty)* 100); // convert dollars to cents
+	var totalAmountCents = Math.round(parseFloat(req.body.Price * req.body.Qty)* 100); // converts the dollars to cents
 	var totalAmountDollars = parseFloat((req.body.Price * req.body.Qty).toFixed(2));
+	// renders checkout.jade and displays the total amount
 	res.render('checkout', {title: 'Assignment 2', TotalAmountCents: totalAmountCents, TotalAmountDollars: totalAmountDollars});
 });
 
-var stripe = require("stripe")("sk_test_6ylkK6n5ReMSdlZBhvhrLS8T");
 
+// submits the credit information and ammount to the stripe account
 router.post('/restaurants/donate', function (req,res,next) {
 	var stripeToken = req.body.stripeToken;
 	var charge = stripe.charges.create({
@@ -189,22 +212,25 @@ router.post('/restaurants/donate', function (req,res,next) {
 		card: stripeToken,
 		description: 'This is a description'
 	}, function(err, donate) {
+		//if error shows the error
 		if (err) {
-			res.render('error', { title: 'Payment Unsuccessful', error: err } );
-		} else {
-			res.render('donated', { title: 'Payment Successful' } );
+			res.render('error', { title: 'Assignment 2', error: err } );	
+		}
+		//if no error loads the donated page
+		else {
+			res.render('donated', { title: 'Assignment 2' } );
 		}
 	});
 });
 
-
-
 // sends the data for all restaurants in an API request
 router.get('/api/restaurants', function (req,res,next) {
 	Restaurant.find(function (err, restaurant) {
+		//if error sends the error
 		if (err) {
 			res.send(err);	
 		}	
+		//if no error sends restaurant data in JSON
 		else {
 			res.send(restaurant);
 		}
@@ -220,6 +246,7 @@ router.get('/api/restaurants/:id', function (req,res,next) {
 		if (err) {
 			res.send(err);
 		}
+		//if no error sends restaurant data in JSON
 		else {
 			res.send(restaurant);
 		}

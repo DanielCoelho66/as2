@@ -10,4 +10,5 @@ var RestaurantSchema = new mongoose.Schema({
 	description: String
 });
 
+//export the restaurant schema to be used throughout the application
 module.exports = mongoose.model('Restaurant', RestaurantSchema);

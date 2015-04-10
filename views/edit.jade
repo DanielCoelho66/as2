@@ -7,8 +7,8 @@ block content
 		input(name='restaurantName', type='text', required, placeholder='Name of Restaurant', value='#{restaurant.restaurantName}')
 		label(for='url') URL of the restaurant
 		input(name='url', type='url', required, placeholder='URL of the restaurant', value='#{restaurant.url}')
-		label(for='image') Image
-		input(name='image', type='file', placeholder='Add an Image', value='#{restaurant.image}')
+		label(for='image') Logo
+		input(name='image', type='file', required, placeholder='Add a Logo', value='#{restaurant.image}')
 		label(for='rating') Rating (Out of 5)
 		input(name='rating', type='number', min='1', max='5', required, placeholder='Rating', value='#{restaurant.rating}')
 		label(for='description') Description 

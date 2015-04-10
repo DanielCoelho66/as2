@@ -3,10 +3,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
-}
+ }
 #page {
 	width: 80%;
 	margin: auto;
+	background: none;
 }
 #container {
 	width: 50%;
@@ -15,6 +16,19 @@ body {
 h2 {
 	font-size: 24px; 
 	text-align:center;
+}
+.home {
+  	background-color: #F0EAD6;
+ 	background-image: url(../images/restaurant.jpg);
+  	background-repeat: no-repeat;
+  	background-size: cover;
+}
+.home h2 {
+	background-color: white;
+	opacity: 0.75;
+	padding: 1%;
+	width: 50%;
+	margin: 30px auto;
 }
 form > div > h2 {
 	width: 40%;
@@ -165,13 +179,12 @@ tfoot > tr > td:only-child > a {
 	transition: all 1s linear;
 	border: 2px solid blue;
 }
-
 /*== END TABLE STYLING ==*/
 
 /*== START FORM STYLING ==*/
 form {
 	width: 50%;
-	margin: 50px auto;
+	margin: 30px auto;
 }
 #donateLabel {
 	display: block;

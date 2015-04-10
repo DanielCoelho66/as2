@@ -7,11 +7,11 @@ block content
 		input(name='restaurantName', type='text', required, placeholder='Name of Restaurant')
 		label(for='url') URL of the restaurant
 		input(name='url', type='url', required, placeholder='URL of the restaurant')
-		label(for='image') Image
-		input(name='image', type='file', required, placeholder='Add an Image')
+		label(for='image') Logo
+		input(name='image', type='file', required, placeholder='Add a Logo')
 		label(for='rating') Rating (Out of 5)
 		input(name='rating', type='number', min='1', max='5', required, placeholder='Rating')
 		label(for='description') Description 
-		textarea(name='description', type='text', required, placeholder='Description')
+		textarea(name='description', type='text', cols='20', rows='4', required, placeholder='Description')
 		div(class='clearfix')
 			input(type='submit', value='Add Restaurant')
